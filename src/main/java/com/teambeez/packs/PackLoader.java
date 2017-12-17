@@ -1,13 +1,13 @@
-package com.teambeez.plugins;
+package com.teambeez.packs;
 
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 
-public class DiscordPluginLoader extends ClassLoader {
+public class PackLoader extends ClassLoader {
     private File directory;
 
-    public DiscordPluginLoader(File dir) {
+    public PackLoader(File dir) {
         this.directory = dir;
     }
 

@@ -1,24 +1,17 @@
 package com.teambeez.listeners;
 
-import com.teambeez.PogeBot;
 import com.teambeez.containers.CommandData;
-import com.teambeez.music.GuildManager;
 import com.teambeez.parsers.CommandParser;
 import com.teambeez.parsers.ParseException;
-import com.teambeez.plugins.PluginManager;
-import com.teambeez.plugins.PluginNotFoundException;
-import com.teambeez.plugins.defaults.Music;
+import com.teambeez.packs.PackHandler;
 import com.teambeez.util.MessageHandler;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.ShutdownEvent;
-import net.dv8tion.jda.core.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class Listener extends ListenerAdapter {
-    private static PluginManager pluginManager;
+    private static PackHandler packHandler;
 
     /**
      * Used to detect when JDA-API successfully connects to Discord
@@ -29,11 +22,8 @@ public class Listener extends ListenerAdapter {
         /* TODO: Load Settings */
 
         /* Load Plugins */
-        pluginManager = new PluginManager();
-        pluginManager.loadPlugins();
-
-        /* Logging Completion */
-        //TODO PogeBot.LOG.info("PogeBot-API Initialized");
+        packHandler = new PackHandler();
+        packHandler.startPacks();
     }
 
     /**
@@ -51,10 +41,10 @@ public class Listener extends ListenerAdapter {
             CommandData data = CommandParser.parseCommand(event);
 
             /* Invoke Commands */
-            this.pluginManager.invokePlugin(data.getCommand(), data);
+            //this.packHandler.invokePlugin(data.getCommand(), data);
             MessageHandler.deleteMessage(event.getMessage(), event.getTextChannel());
 
-        } catch (PluginNotFoundException | ParseException ignore) { }
+        } catch (ParseException ignore) { }
     }
 
     /**
@@ -67,15 +57,7 @@ public class Listener extends ListenerAdapter {
         /* TODO: Shutdown Plugins */
     }
 
-    @Override
-    public void onGuildVoiceLeave(GuildVoiceLeaveEvent event) {
-        VoiceChannel channel = event.getChannelLeft();
-        if(channel.getMembers().size() == 1 && channel.getMembers().get(0).getUser().equals(event.getJDA().getSelfUser())) {
-            Music.instance.stopAll(event.getGuild());
-        }
-    }
-
-    public static PluginManager getPluginManager() {
-        return pluginManager;
+    public static PackHandler getPackHandler() {
+        return packHandler;
     }
 }
