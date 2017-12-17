@@ -54,10 +54,6 @@ public class PogeBot {
                 GuildManager musicManager = new GuildManager(playerManager);
                 guilds.put(g.getIdLong(), musicManager);
                 g.getAudioManager().setSendingHandler(musicManager.getSendHandler());
-
-                if(g.getSelfMember().getNickname().equalsIgnoreCase("MusicBot")){
-                    g.getController().setNickname(g.getSelfMember(), "Anthony is Gay").queue();
-                }
             }
 
         }
