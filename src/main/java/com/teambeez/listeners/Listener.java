@@ -54,7 +54,7 @@ public class Listener extends ListenerAdapter {
     @Override
     public void onShutdown(ShutdownEvent event) {
         /* TODO: Save Settings */
-        /* TODO: Shutdown Plugins */
+        /* Shutdown Plugins */
         this.packHandler.clearPacks();
     }
 }

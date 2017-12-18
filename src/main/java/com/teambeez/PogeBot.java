@@ -15,7 +15,7 @@ import javax.security.auth.login.LoginException;
 public class PogeBot {
 
     private PogeBot(String info, String token) {
-        /* Initialise Bot */
+        /* Initialize Bot */
         try {
             JDA jda = new JDABuilder(AccountType.BOT)
                     .setToken(token)
