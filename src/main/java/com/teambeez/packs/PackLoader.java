@@ -1,46 +1,34 @@
 package com.teambeez.packs;
 
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
-public class PackLoader extends ClassLoader {
-    private File directory;
+import javax.annotation.Nullable;
+import java.io.*;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Enumeration;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
-    public PackLoader(File dir) {
-        this.directory = dir;
+public class PackLoader extends URLClassLoader {
+    public PackLoader(URL jarFileUrl) {
+        super(new URL[]{jarFileUrl});
     }
 
-    public Class loadClass(String name) throws ClassNotFoundException {
-        return loadClass(name, true);
-    }
+    @Nullable
+    PackData readJar(JarFile jar) {
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        Enumeration<? extends JarEntry> entries = jar.entries();
 
-    public Class loadClass(String classname, boolean resolve) throws ClassNotFoundException {
-        try {
-            Class c = findLoadedClass(classname);
-
-            if(c == null) {
-                try { c = findSystemClass(classname); }
-                catch (Exception ignored) {}
+        while(entries.hasMoreElements()) {
+            JarEntry entry = entries.nextElement();
+            if(entry.getName().equals("pack.yml")) {
+                try (InputStream is = jar.getInputStream(entry)) {
+                    return mapper.readValue(is, PackData.class);
+                } catch (IOException ignored) { }
             }
-
-            if(c == null) {
-                String filename = classname.replace('.', File.separatorChar)+".class";
-                File f = new File(directory, filename);
-
-                int length = (int) f.length();
-                byte[] classbytes = new byte[length];
-                DataInputStream in = new DataInputStream(new FileInputStream(f));
-                in.readFully(classbytes);
-                in.close();
-
-                c = defineClass(classname, classbytes, 0, length);
-            }
-
-            if(resolve) resolveClass(c);
-
-            return c;
-        } catch (Exception e) { throw new ClassNotFoundException(e.toString()); }
+        }
+        return null;
     }
-
 }

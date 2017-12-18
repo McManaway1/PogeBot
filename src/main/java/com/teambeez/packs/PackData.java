@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class PackData {
     private String name;
-    private String main;
+    private String mainClass;
     private String description;
     private String version;
     private Map<String, Map<String, String>> commands;
@@ -17,12 +17,12 @@ public class PackData {
         this.name = name;
     }
 
-    public String getMain() {
-        return main;
+    public String getMainClass() {
+        return mainClass;
     }
 
-    public void setMain(String main) {
-        this.main = main + ".class";
+    public void setMainClass(String mainClass) {
+        this.mainClass = mainClass;
     }
 
     public String getDescription() {

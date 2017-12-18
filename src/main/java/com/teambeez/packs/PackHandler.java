@@ -1,17 +1,9 @@
 package com.teambeez.packs;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStream;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Map;
-import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class PackHandler {
@@ -30,39 +22,34 @@ public class PackHandler {
         clearPacks();
 
         /* Load Default Plugins */
-        String[] files;
+        File[] files;
         File dir = new File("packs");
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        URLClassLoader loader = (URLClassLoader) ClassLoader.getSystemClassLoader();
 
         if(dir.exists() && dir.isDirectory()) {
-            if((files = dir.list()) == null) return;
+            if((files = dir.listFiles()) == null) return;
 
-            for(String file : files) {
+            for(File file : files) {
                 try {
-                    if(!file.endsWith(".jar")) continue;
-                    JarFile jarFile = new JarFile(dir.getName() + "/" + file);
-                    Enumeration<? extends JarEntry> entries = jarFile.entries();
-
-                    while(entries.hasMoreElements()) {
-                        JarEntry entry = entries.nextElement();
-                        if(entry.getName().equals("pack.yml")) {
-                            InputStream is = jarFile.getInputStream(entry);
-                            PackData packData = mapper.readValue(is, PackData.class);
-                            for(String s : packData.getCommands().keySet()) {
-                                System.out.println(s);
-                            }
-                            is.close();
-                        }
+                    if(!file.getName().endsWith(".jar")) continue;
+                    PackLoader packLoader = new PackLoader(file.toURI().toURL());
+                    PackData data =  packLoader.readJar(new JarFile(file.toURI().toURL().getPath()));
+                    /* Check if Jar contained a 'pack.yml' file */
+                    if(data == null) {
+                        packLoader.close();
+                        continue;
                     }
+                    Class<?> pluginClass = packLoader.loadClass(data.getMainClass());
+                    IPack pack = (IPack) pluginClass.newInstance();
+                    pack.initialize();
 
+                    packs.add(pack);
                 } catch (Exception e) {
-                    throw new Error("File " + file + " doesn't contain DiscordPlugin class");
+                    e.printStackTrace();
                 }
             }
         } else {
-            if(dir.mkdir()) ;//TODO PogeBot.LOG.info("Created Plugins Directory");
-            else throw new Error("Unable to create Plugin Directory");
+            if(dir.mkdir()) ;//TODO PogeBot.LOG.info("Created Pack Directory");
+            else throw new Error("Unable to create Pack Directory");
         }
     }
 
@@ -70,7 +57,6 @@ public class PackHandler {
      * Invokes Packs
      */
     public void invokePacks() {
-
     }
 
 
