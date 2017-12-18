@@ -1,6 +1,8 @@
 package com.teambeez.packs;
 
 
+import com.teambeez.containers.CommandData;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +58,10 @@ public class PackHandler {
     /**
      * Invokes Packs
      */
-    public void invokePacks() {
+    public void invokePacks(CommandData data) {
+        for(IPack pack : packs) {
+            pack.invoke(data);
+        }
     }
 
 

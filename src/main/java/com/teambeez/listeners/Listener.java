@@ -11,7 +11,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class Listener extends ListenerAdapter {
-    private static PackHandler packHandler;
+    private PackHandler packHandler;
 
     /**
      * Used to detect when JDA-API successfully connects to Discord
@@ -22,8 +22,8 @@ public class Listener extends ListenerAdapter {
         /* TODO: Load Settings */
 
         /* Load Plugins */
-        packHandler = new PackHandler();
-        packHandler.startPacks();
+        this.packHandler = new PackHandler();
+        this.packHandler.startPacks();
     }
 
     /**
@@ -41,7 +41,7 @@ public class Listener extends ListenerAdapter {
             CommandData data = CommandParser.parseCommand(event);
 
             /* Invoke Commands */
-            //this.packHandler.invokePlugin(data.getCommand(), data);
+            this.packHandler.invokePacks(data);
             MessageHandler.deleteMessage(event.getMessage(), event.getTextChannel());
 
         } catch (ParseException ignore) { }
@@ -55,9 +55,6 @@ public class Listener extends ListenerAdapter {
     public void onShutdown(ShutdownEvent event) {
         /* TODO: Save Settings */
         /* TODO: Shutdown Plugins */
-    }
-
-    public static PackHandler getPackHandler() {
-        return packHandler;
+        this.packHandler.clearPacks();
     }
 }
