@@ -13,11 +13,12 @@ import javax.security.auth.login.LoginException;
  * This class is used to build a Java Discord API Implementation
  */
 public class PogeBot {
+    private static JDA jda;
 
     private PogeBot(String info, String token) {
         /* Initialize Bot */
         try {
-            JDA jda = new JDABuilder(AccountType.BOT)
+            jda = new JDABuilder(AccountType.BOT)
                     .setToken(token)
                     .addEventListener(new Listener())
                     .buildAsync();
@@ -27,6 +28,9 @@ public class PogeBot {
         catch (RateLimitedException e) { throw new Error("Too many Login Attempts"); }
     }
 
+    public static JDA getJda() {
+        return jda;
+    }
 
     public static void main(String[] args) {
         /* Start Bot using Command Arguments */
