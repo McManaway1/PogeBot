@@ -1,4 +1,4 @@
-package com.teambeez.packs;
+package com.teambeez.packs.pack;
 
 import com.teambeez.parsers.containers.CommandData;
 import net.dv8tion.jda.core.events.Event;

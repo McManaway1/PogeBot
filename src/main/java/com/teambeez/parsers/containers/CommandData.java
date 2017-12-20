@@ -1,6 +1,9 @@
 package com.teambeez.parsers.containers;
 
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import javax.annotation.Nullable;
@@ -52,13 +55,14 @@ public class CommandData {
     /**
      * @return The Member which sent the Command.
      */
-    public Member getMember() { return event.getMember(); }
+    public Member getMember() {
+        return event.getMember();
+    }
 
     /**
      * @return The TextChannel the command was sent from.
      */
-    public TextChannel getChannel()
-    {
+    public TextChannel getChannel() {
         return event.getMessage().getTextChannel();
     }
 
@@ -68,7 +72,7 @@ public class CommandData {
     @Nullable
     public User getFirstMention() {
         List<User> mentions = event.getMessage().getMentionedUsers();
-        if(mentions.isEmpty()) return null;
+        if (mentions.isEmpty()) return null;
         return mentions.get(0);
     }
 }

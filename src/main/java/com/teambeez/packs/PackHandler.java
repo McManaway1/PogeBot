@@ -1,11 +1,13 @@
 package com.teambeez.packs;
 
 
+import com.teambeez.packs.pack.IPack;
+import com.teambeez.packs.pack.PackData;
+import com.teambeez.packs.pack.essentials.Help;
+import com.teambeez.packs.pack.essentials.Info;
+import com.teambeez.packs.pack.essentials.Purge;
+import com.teambeez.packs.pack.essentials.Reload;
 import com.teambeez.parsers.containers.CommandData;
-import com.teambeez.packs.essentials.Help;
-import com.teambeez.packs.essentials.Info;
-import com.teambeez.packs.essentials.Purge;
-import com.teambeez.packs.essentials.Reload;
 import net.dv8tion.jda.core.events.Event;
 
 import java.io.File;
@@ -21,9 +23,9 @@ public class PackHandler {
     }
 
     /**
-     * This method either:
-     * A: Creates a 'pack' folder on the first boot of the DiscordBot
-     * B: Dynamically Loads plugins from the 'pack' folder for invoking later
+     * This method at startup will load all Packs currently stored in the 'packs' folder.
+     * It will also allow for Packs to be dynamically reloaded during runtime, either to update an
+     * existing Pack, or to initialize a new one.
      */
     public void startPacks() {
         clearPacks();
@@ -60,14 +62,20 @@ public class PackHandler {
         }
     }
 
+    /**
+     * This method alerts all Packs of an event occurring, allows for Pack Creators to handle
+     * events other than 'Startup' and 'MessageReceived'
+     * @param event The event triggered
+     */
     public void alertPacks(Event event) {
-        for(IPack pack : packs.keySet()) {
+        for (IPack pack : packs.keySet()) {
             pack.onEvent(event);
         }
     }
 
     /**
-     * Invokes Packs
+     * Whenever a Command is received, this method will be called to pass the CommandData object
+     * to all loaded Packs in Memory.
      */
     public void invokePacks(CommandData data) {
         /* Scan if the command is from this API, then check if it belongs to a Pack */

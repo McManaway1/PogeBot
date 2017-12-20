@@ -1,4 +1,4 @@
-package com.teambeez.packs.essentials;
+package com.teambeez.packs.pack.essentials;
 
 import com.teambeez.parsers.containers.CommandData;
 import com.teambeez.packs.PackHandler;

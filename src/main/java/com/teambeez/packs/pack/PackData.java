@@ -1,4 +1,4 @@
-package com.teambeez.packs;
+package com.teambeez.packs.pack;
 
 import java.util.Map;
 
@@ -13,6 +13,7 @@ public class PackData {
         return name;
     }
 
+    @SuppressWarnings("unused")
     public void setName(String name) {
         this.name = name;
     }
@@ -21,6 +22,7 @@ public class PackData {
         return mainClass;
     }
 
+    @SuppressWarnings("unused")
     public void setMainClass(String mainClass) {
         this.mainClass = mainClass;
     }
@@ -29,6 +31,7 @@ public class PackData {
         return description;
     }
 
+    @SuppressWarnings("unused")
     public void setDescription(String description) {
         this.description = description;
     }
@@ -37,6 +40,7 @@ public class PackData {
         return version;
     }
 
+    @SuppressWarnings("unused")
     public void setVersion(String version) {
         this.version = version;
     }
@@ -45,6 +49,7 @@ public class PackData {
         return commands;
     }
 
+    @SuppressWarnings("unused")
     public void setCommands(Map<String, Map<String, String>> commands) {
         this.commands = commands;
     }

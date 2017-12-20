@@ -11,7 +11,7 @@ public class CommandParser {
         String content = event.getMessage().getContent();
 
         /* Check if the message is a Command */
-        if(!content.startsWith(prefix)) throw new ParseException();
+        if (!content.startsWith(prefix)) throw new ParseException();
         content = content.replaceFirst(prefix, "");
 
         /* Split and Return */

@@ -1,7 +1,7 @@
-package com.teambeez.packs.essentials;
+package com.teambeez.packs.pack.essentials;
 
 import com.teambeez.parsers.containers.CommandData;
-import com.teambeez.packs.PackData;
+import com.teambeez.packs.pack.PackData;
 import com.teambeez.util.MessageHandler;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.MessageBuilder;
