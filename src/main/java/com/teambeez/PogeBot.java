@@ -18,10 +18,7 @@ public class PogeBot {
     private PogeBot(String info, String token) {
         /* Initialize Bot */
         try {
-            jda = new JDABuilder(AccountType.BOT)
-                    .setToken(token)
-                    .addEventListener(new Listener())
-                    .buildAsync();
+            jda = new JDABuilder(AccountType.BOT).setToken(token).addEventListener(new Listener()).buildAsync();
             jda.getPresence().setPresence(Game.of(Game.GameType.LISTENING, info), false);
         }
         catch (LoginException e) { throw new Error("Failed to Authenticate"); }
