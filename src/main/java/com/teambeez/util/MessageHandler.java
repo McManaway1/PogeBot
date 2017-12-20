@@ -21,11 +21,11 @@ public class MessageHandler {
 
     public static void deleteMessage(Message message, TextChannel channel) {
         /* Check Permissions */
-        if(message == null) return;
+        if(channel == null || message == null) return;
         if(!message.getGuild().getSelfMember().hasPermission(channel, Permission.MESSAGE_MANAGE)) return;
 
         /* Delete Message */
-        message.delete().queue();
+        channel.deleteMessageById(message.getId()).queue();
     }
 
     public static void deleteMessages(List<Message> messages, TextChannel channel) {

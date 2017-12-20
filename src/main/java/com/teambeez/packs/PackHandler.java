@@ -1,7 +1,7 @@
 package com.teambeez.packs;
 
 
-import com.teambeez.containers.CommandData;
+import com.teambeez.parsers.containers.CommandData;
 import com.teambeez.packs.essentials.Help;
 import com.teambeez.packs.essentials.Info;
 import com.teambeez.packs.essentials.Purge;

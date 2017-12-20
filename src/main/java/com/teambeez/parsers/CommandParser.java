@@ -1,10 +1,7 @@
 package com.teambeez.parsers;
 
-import com.teambeez.containers.CommandData;
+import com.teambeez.parsers.containers.CommandData;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class CommandParser {
     private static final String prefix = "!";
@@ -18,7 +15,7 @@ public class CommandParser {
         content = content.replaceFirst(prefix, "");
 
         /* Split and Return */
-        List<String> split = Arrays.asList(content.split(" "));
-        return new CommandData(split.get(0).toLowerCase(), split, event);
+        String[] split = content.split(" ", 2);
+        return new CommandData(split[0], split[1], event);
     }
 }

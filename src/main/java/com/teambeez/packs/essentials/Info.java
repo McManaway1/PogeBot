@@ -1,6 +1,6 @@
 package com.teambeez.packs.essentials;
 
-import com.teambeez.containers.CommandData;
+import com.teambeez.parsers.containers.CommandData;
 import com.teambeez.util.MessageHandler;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDAInfo;

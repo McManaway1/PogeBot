@@ -1,4 +1,4 @@
-package com.teambeez.containers;
+package com.teambeez.parsers.containers;
 
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -7,11 +7,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class CommandData {
-    private final String command;
-    private final List<String> arguments;
+    private final String command, arguments;
     private final MessageReceivedEvent event;
 
-    public CommandData(String command, List<String> arguments, MessageReceivedEvent event) {
+    public CommandData(String command, String arguments, MessageReceivedEvent event) {
         this.command = command;
         this.arguments = arguments;
         this.event = event;
@@ -21,8 +20,12 @@ public class CommandData {
         return command;
     }
 
-    public List<String> getArguments() {
+    public String getArguments() {
         return arguments;
+    }
+
+    public Guild getGuild() {
+        return event.getGuild();
     }
 
     public Member getMember() { return event.getMember(); }

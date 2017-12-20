@@ -1,52 +1,56 @@
 package com.teambeez.listeners;
 
-import com.teambeez.containers.CommandData;
+import com.teambeez.parsers.containers.CommandData;
+import com.teambeez.packs.PackHandler;
 import com.teambeez.parsers.CommandParser;
 import com.teambeez.parsers.ParseException;
-import com.teambeez.packs.PackHandler;
 import com.teambeez.util.MessageHandler;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.ShutdownEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
-import java.awt.*;
-
 public class Listener extends ListenerAdapter {
     private PackHandler packHandler;
 
     /**
-     * Used to detect when JDA-API successfully connects to Discord
-     * @param event The Ready-Event
+     * When the Connection to Discord Servers is Successful, the ReadyEvent will
+     * fire. This method catches the Event and uses it to load and initialize all Packs
+     * in the 'packs' folder into the Application.
+     *
+     * @param event
      */
     @Override
     public void onReady(ReadyEvent event) {
-        /* TODO: Load Settings */
-
         /* Load Plugins */
         this.packHandler = new PackHandler();
         this.packHandler.startPacks();
     }
 
+    /**
+     * Whenever any event occurs from the Discord, all Pack's will be alerted of the
+     * Event that occurred.
+     *
+     * @param event
+     */
     @Override
     public void onGenericEvent(Event event) {
+        if(this.packHandler == null) return;
         this.packHandler.alertPacks(event);
     }
 
     /**
-     * Used to detect when a message is received. If the message
-     * starts with the require prefix, it will attempt to run a command.
-     * @param event The Message-Event
+     * Whenever a message occurs in chat, the API will attempt to check if
+     * event is a Command. If it was a command the API will then alert all Pack's
+     * about the Command processed.
+     *
+     * @param event
      */
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         /* Ignore Bot Commands */
-        if(event.getAuthor().isBot()) return;
+        if (event.getAuthor().isBot()) return;
 
         try {
             /* Parse Received Message */
@@ -56,7 +60,8 @@ public class Listener extends ListenerAdapter {
             this.packHandler.invokePacks(data);
             MessageHandler.deleteMessage(event.getMessage(), event.getTextChannel());
 
-        } catch (ParseException ignore) { }
+        } catch (ParseException ignore) {
+        }
     }
 
     /**
@@ -65,7 +70,6 @@ public class Listener extends ListenerAdapter {
      */
     @Override
     public void onShutdown(ShutdownEvent event) {
-        /* TODO: Save Settings */
         /* Shutdown Plugins */
         this.packHandler.clearPacks();
     }
