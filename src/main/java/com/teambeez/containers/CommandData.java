@@ -25,16 +25,6 @@ public class CommandData {
         return arguments;
     }
 
-    /**
-     * Please use #getMember#getUser() from now on
-     * @return
-     */
-    @Deprecated
-    public User getAuthor()
-    {
-        return event.getMessage().getAuthor();
-    }
-
     public Member getMember() { return event.getMember(); }
 
     public TextChannel getChannel()

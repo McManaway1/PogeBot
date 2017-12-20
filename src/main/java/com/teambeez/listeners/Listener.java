@@ -5,10 +5,17 @@ import com.teambeez.parsers.CommandParser;
 import com.teambeez.parsers.ParseException;
 import com.teambeez.packs.PackHandler;
 import com.teambeez.util.MessageHandler;
+import net.dv8tion.jda.core.Permission;
+import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.Role;
+import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.ShutdownEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+
+import java.awt.*;
 
 public class Listener extends ListenerAdapter {
     private PackHandler packHandler;
@@ -24,6 +31,11 @@ public class Listener extends ListenerAdapter {
         /* Load Plugins */
         this.packHandler = new PackHandler();
         this.packHandler.startPacks();
+    }
+
+    @Override
+    public void onGenericEvent(Event event) {
+        this.packHandler.alertPacks(event);
     }
 
     /**

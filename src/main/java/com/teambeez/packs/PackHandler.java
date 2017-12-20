@@ -2,17 +2,22 @@ package com.teambeez.packs;
 
 
 import com.teambeez.containers.CommandData;
+import com.teambeez.packs.essentials.Help;
+import com.teambeez.packs.essentials.Info;
+import com.teambeez.packs.essentials.Purge;
+import com.teambeez.packs.essentials.Reload;
+import net.dv8tion.jda.core.events.Event;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.jar.JarFile;
 
 public class PackHandler {
-    private final List<IPack> packs;
+    private final Map<IPack, PackData> packs;
 
     public PackHandler() {
-        packs = new ArrayList<>();
+        packs = new HashMap<>();
     }
 
     /**
@@ -27,16 +32,16 @@ public class PackHandler {
         File[] files;
         File dir = new File("packs");
 
-        if(dir.exists() && dir.isDirectory()) {
-            if((files = dir.listFiles()) == null) return;
+        if (dir.exists() && dir.isDirectory()) {
+            if ((files = dir.listFiles()) == null) return;
 
-            for(File file : files) {
+            for (File file : files) {
                 try {
-                    if(!file.getName().endsWith(".jar")) continue;
+                    if (!file.getName().endsWith(".jar")) continue;
                     PackLoader packLoader = new PackLoader(file.toURI().toURL());
-                    PackData data =  packLoader.readJar(new JarFile(file.toURI().toURL().getPath()));
+                    PackData data = packLoader.readJar(new JarFile(file.toURI().toURL().getPath()));
                     /* Check if Jar contained a 'pack.yml' file */
-                    if(data == null) {
+                    if (data == null) {
                         packLoader.close();
                         continue;
                     }
@@ -44,14 +49,20 @@ public class PackHandler {
                     IPack pack = (IPack) pluginClass.newInstance();
                     pack.initialize();
 
-                    packs.add(pack);
+                    packs.put(pack, data);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         } else {
-            if(dir.mkdir()) ;//TODO PogeBot.LOG.info("Created Pack Directory");
+            if (dir.mkdir()) ;//TODO PogeBot.LOG.info("Created Pack Directory");
             else throw new Error("Unable to create Pack Directory");
+        }
+    }
+
+    public void alertPacks(Event event) {
+        for(IPack pack : packs.keySet()) {
+            pack.onEvent(event);
         }
     }
 
@@ -59,8 +70,24 @@ public class PackHandler {
      * Invokes Packs
      */
     public void invokePacks(CommandData data) {
-        for(IPack pack : packs) {
-            pack.invoke(data);
+        /* Scan if the command is from this API, then check if it belongs to a Pack */
+        switch (data.getCommand()) {
+            case "help":
+                Help.invoke(data, packs.values());
+                break;
+            case "info":
+                Info.invoke(data);
+                break;
+            case "purge":
+                Purge.invoke(data);
+                break;
+            case "reload":
+                Reload.invoke(data, this);
+                break;
+            default:
+                for (IPack pack : packs.keySet()) {
+                    pack.invoke(data);
+                }
         }
     }
 
@@ -71,7 +98,7 @@ public class PackHandler {
      * save their data.
      */
     public void clearPacks() {
-        packs.forEach(IPack::close);
+        packs.keySet().forEach(IPack::close);
         packs.clear();
     }
 
