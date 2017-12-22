@@ -6,11 +6,14 @@ import com.teambeez.parsers.containers.CommandData;
 import net.dv8tion.jda.core.utils.tuple.ImmutablePair;
 import net.dv8tion.jda.core.utils.tuple.Pair;
 
+import java.awt.*;
 import java.util.Collection;
 
 public class Help {
     public static void invoke(CommandData data, Collection<PackData> packs) {
-        EmbedCreator embed = new EmbedCreator().setTitle("Pack-Command List <Version 0.6>");
+        EmbedCreator embed = new EmbedCreator(data.getMember())
+                .setTitle("Pack-Command List <Version 0.6>")
+                .setColor(Color.CYAN);
 
         Pair<String, String> commandData = getCommands(null, true);
         embed.addField("Default Pack", "*Commands Prebuilt into the Discord API*", false);
