@@ -1,5 +1,6 @@
 package com.teambeez.listeners;
 
+import com.teambeez.messages.MessageHandler;
 import com.teambeez.packs.PackHandler;
 import com.teambeez.parsers.CommandParser;
 import com.teambeez.parsers.ParseException;
@@ -18,7 +19,7 @@ public class Listener extends ListenerAdapter {
      * fire. This method catches the Event and uses it to load and initialize all Packs
      * in the 'packs' folder into the Application.
      *
-     * @param event
+     * @param event ReadyEvent
      */
     @Override
     public void onReady(ReadyEvent event) {
@@ -31,7 +32,7 @@ public class Listener extends ListenerAdapter {
      * Whenever any event occurs from the Discord, all Pack's will be alerted of the
      * Event that occurred.
      *
-     * @param event
+     * @param event Any Received Event
      */
     @Override
     public void onGenericEvent(Event event) {
@@ -44,7 +45,7 @@ public class Listener extends ListenerAdapter {
      * event is a Command. If it was a command the API will then alert all Pack's
      * about the Command processed.
      *
-     * @param event
+     * @param event Message Received Event
      */
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
@@ -56,7 +57,7 @@ public class Listener extends ListenerAdapter {
             CommandData data = CommandParser.parseCommand(event);
 
             /* Invoke Commands */
-            event.getChannel().deleteMessageById(event.getMessageId()).queue();
+            MessageHandler.deleteMessage("Command Request", event.getMessage());
             this.packHandler.invokePacks(data);
 
         } catch (ParseException ignore) {

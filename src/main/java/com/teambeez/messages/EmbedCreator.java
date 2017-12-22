@@ -14,6 +14,10 @@ public class EmbedCreator {
         this.embed = new EmbedBuilder();
     }
 
+    public static EmbedCreator create() {
+        return new EmbedCreator();
+    }
+
     public EmbedCreator setTitle(String title) {
         embed.setTitle(title);
         return this;
@@ -36,11 +40,11 @@ public class EmbedCreator {
 
     public void sendEmbedMessage(TextChannel channel) {
         MessageBuilder message = new MessageBuilder().setEmbed(embed.build());
-        channel.sendMessage(message.build()).queue();
+        MessageHandler.sendMessage(message.build(), channel);
     }
 
     public void sendEmbedMessage(TextChannel channel, Consumer<Message> consumer) {
         MessageBuilder message = new MessageBuilder().setEmbed(embed.build());
-        channel.sendMessage(message.build()).queue(consumer);
+        MessageHandler.sendMessage(message.build(), channel, consumer);
     }
 }
