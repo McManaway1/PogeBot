@@ -8,7 +8,7 @@ public class CommandParser {
 
     public static CommandData parseCommand(MessageReceivedEvent event) throws ParseException {
         /* Create variable to Modify */
-        String content = event.getMessage().getContent();
+        String content = event.getMessage().getContentDisplay();
 
         /* Check if the message is a Command */
         if (!content.startsWith(prefix)) throw new ParseException();
@@ -16,6 +16,6 @@ public class CommandParser {
 
         /* Split and Return */
         String[] split = content.split(" ", 2);
-        return new CommandData(split[0], split[1], event);
+        return new CommandData(split[0], split.length > 1 ? split[1] : "", event);
     }
 }

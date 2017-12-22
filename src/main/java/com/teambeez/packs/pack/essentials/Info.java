@@ -1,22 +1,15 @@
 package com.teambeez.packs.pack.essentials;
 
+import com.teambeez.messages.EmbedCreator;
 import com.teambeez.parsers.containers.CommandData;
-import com.teambeez.util.MessageHandler;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDAInfo;
-import net.dv8tion.jda.core.MessageBuilder;
-
-import java.awt.*;
 
 public class Info {
     public static void invoke(CommandData data) {
-        MessageBuilder builder = new MessageBuilder();
-        EmbedBuilder embed = MessageHandler.getFooterEmbedBuilder("PogeBot Information", Color.CYAN, data.getMember().getUser());
-
-        embed.addField("Creator", "Poge", false);
-        embed.addField("Version", "DEVELOPMENT", false);
-        embed.addField("JDA Version", JDAInfo.VERSION, false);
-
-        MessageHandler.sendMessage(builder.setEmbed(embed.build()).build(), data.getChannel());
+        new EmbedCreator().setTitle("Bot Information")
+                .addField("Creator", "Poge", false)
+                .addField("Version", "DEVELOPMENT", false)
+                .addField("JDA Version", JDAInfo.VERSION, false)
+                .sendEmbedMessage(data.getChannel());
     }
 }

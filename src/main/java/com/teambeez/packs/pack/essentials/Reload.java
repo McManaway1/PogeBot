@@ -1,27 +1,19 @@
 package com.teambeez.packs.pack.essentials;
 
-import com.teambeez.parsers.containers.CommandData;
+import com.teambeez.messages.EmbedCreator;
 import com.teambeez.packs.PackHandler;
-import com.teambeez.util.MessageHandler;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.MessageBuilder;
-
-import java.awt.*;
+import com.teambeez.parsers.containers.CommandData;
 
 public class Reload {
     public static void invoke(CommandData data, PackHandler handler) {
-        MessageBuilder builder = new MessageBuilder();
-        EmbedBuilder embed = MessageHandler.getFooterEmbedBuilder("Reload", Color.CYAN, data.getMember().getUser());
-
+        EmbedCreator embed = new EmbedCreator().setTitle("Reload Packs");
         //TODO: Permissions
-        if(data.getMember().getUser().getIdLong() != 132657708791758848L) {
+        if (data.getMember().getUser().getIdLong() != 132657708791758848L) {
             embed.setDescription("Invalid Permissions");
-        }
-        else {
+        } else {
             handler.startPacks();
             embed.setDescription("Reloaded all Packs");
         }
-
-        MessageHandler.sendMessage(builder.setEmbed(embed.build()).build(), data.getChannel());
+        embed.sendEmbedMessage(data.getChannel());
     }
 }

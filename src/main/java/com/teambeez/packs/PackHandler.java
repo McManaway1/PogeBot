@@ -65,6 +65,7 @@ public class PackHandler {
     /**
      * This method alerts all Packs of an event occurring, allows for Pack Creators to handle
      * events other than 'Startup' and 'MessageReceived'
+     *
      * @param event The event triggered
      */
     public void alertPacks(Event event) {

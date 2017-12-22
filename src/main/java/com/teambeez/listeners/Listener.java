@@ -1,10 +1,9 @@
 package com.teambeez.listeners;
 
-import com.teambeez.parsers.containers.CommandData;
 import com.teambeez.packs.PackHandler;
 import com.teambeez.parsers.CommandParser;
 import com.teambeez.parsers.ParseException;
-import com.teambeez.util.MessageHandler;
+import com.teambeez.parsers.containers.CommandData;
 import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.ShutdownEvent;
@@ -36,7 +35,7 @@ public class Listener extends ListenerAdapter {
      */
     @Override
     public void onGenericEvent(Event event) {
-        if(this.packHandler == null) return;
+        if (this.packHandler == null) return;
         this.packHandler.alertPacks(event);
     }
 
@@ -57,8 +56,8 @@ public class Listener extends ListenerAdapter {
             CommandData data = CommandParser.parseCommand(event);
 
             /* Invoke Commands */
+            event.getChannel().deleteMessageById(event.getMessageId()).queue();
             this.packHandler.invokePacks(data);
-            MessageHandler.deleteMessage(event.getMessage(), event.getTextChannel());
 
         } catch (ParseException ignore) {
         }
