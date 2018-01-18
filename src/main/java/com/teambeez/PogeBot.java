@@ -23,8 +23,6 @@ public class PogeBot {
             jda.getPresence().setPresence(Game.of(Game.GameType.LISTENING, info), false);
         } catch (LoginException e) {
             throw new Error("Failed to Authenticate");
-        } catch (RateLimitedException e) {
-            throw new Error("Too many Login Attempts");
         }
     }
 
