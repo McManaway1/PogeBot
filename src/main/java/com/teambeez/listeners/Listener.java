@@ -56,9 +56,11 @@ public class Listener extends ListenerAdapter {
             /* Parse Received Message */
             CommandData data = CommandParser.parseCommand(event);
 
-            /* Invoke Commands */
-            MessageHandler.deleteMessage("Command Request", event.getMessage());
-            this.packHandler.invokePacks(data);
+            /* Invoke Commands if they exist */
+            if (packHandler.commandExists(data.getCommand())) {
+                MessageHandler.deleteMessage("Command Request", event.getMessage());
+                packHandler.invokePacks(data);
+            }
 
         } catch (ParseException ignore) {
         }

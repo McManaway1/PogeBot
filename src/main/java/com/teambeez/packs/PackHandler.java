@@ -11,15 +11,23 @@ import com.teambeez.parsers.containers.CommandData;
 import net.dv8tion.jda.core.events.Event;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.jar.JarFile;
 
 public class PackHandler {
+    private final Set<String> commands;
     private final Map<IPack, PackData> packs;
 
     public PackHandler() {
         packs = new HashMap<>();
+        this.commands = new HashSet<>();
+    }
+
+    /**
+     * @return if the entered command exists in a pack
+     */
+    public boolean commandExists(String command) {
+        return commands.contains(command.toLowerCase());
     }
 
     /**
@@ -29,6 +37,7 @@ public class PackHandler {
      */
     public void startPacks() {
         clearPacks();
+        addDefaultCommands();
 
         /* Load Default Plugins */
         File[] files;
@@ -47,6 +56,10 @@ public class PackHandler {
                         packLoader.close();
                         continue;
                     }
+                    for(String command : data.getCommands().keySet()) {
+                        commands.add(command.toLowerCase());
+                    }
+
                     Class<?> pluginClass = packLoader.loadClass(data.getMainClass());
                     IPack pack = (IPack) pluginClass.newInstance();
                     pack.initialize();
@@ -100,6 +113,13 @@ public class PackHandler {
         }
     }
 
+    /**
+     * Adds all default commands to the ArrayList
+     */
+    private void addDefaultCommands() {
+        Collections.addAll(commands, "help", "info", "purge", "reload");
+    }
+
 
     /**
      * Helper Method called when reloading or closing the DiscordBot.
@@ -107,6 +127,8 @@ public class PackHandler {
      * save their data.
      */
     public void clearPacks() {
+        commands.clear();
+
         packs.keySet().forEach(IPack::close);
         packs.clear();
     }
