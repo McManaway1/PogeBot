@@ -1,0 +1,9 @@
+# Andrew McManaway
+---
+name: Example
+description: Example Pack
+mainClass: ExamplePack
+version: 0.1
+commands:
+  example:
+    description: Example Command
