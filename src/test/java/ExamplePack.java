@@ -1,5 +1,3 @@
-package com.example;
-
 import com.teambeez.parsers.containers.CommandData;
 import com.teambeez.packs.pack.IPack;
 import net.dv8tion.jda.core.events.Event;
