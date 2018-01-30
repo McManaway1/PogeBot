@@ -5,6 +5,7 @@ import com.teambeez.packs.PackHandler;
 import com.teambeez.parsers.CommandParser;
 import com.teambeez.parsers.ParseException;
 import com.teambeez.parsers.containers.CommandData;
+import net.dv8tion.jda.client.events.relationship.FriendRequestReceivedEvent;
 import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.ShutdownEvent;

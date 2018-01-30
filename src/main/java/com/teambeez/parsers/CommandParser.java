@@ -16,6 +16,6 @@ public class CommandParser {
 
         /* Split and Return */
         String[] split = content.split(" ", 2);
-        return new CommandData(split[0].toLowerCase(), split.length > 1 ? split[1].toLowerCase() : "", event);
+        return new CommandData(split[0].toLowerCase(), split.length > 1 ? split[1] : "", event);
     }
 }

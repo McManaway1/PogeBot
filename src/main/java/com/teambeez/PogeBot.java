@@ -5,7 +5,6 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 import javax.security.auth.login.LoginException;
 
@@ -20,7 +19,7 @@ public class PogeBot {
         /* Initialize Bot */
         try {
             jda = new JDABuilder(AccountType.BOT).setToken(token).addEventListener(new Listener()).buildAsync();
-            jda.getPresence().setPresence(Game.of(Game.GameType.LISTENING, info), false);
+            jda.getPresence().setPresence(Game.of(Game.GameType.DEFAULT, info), false);
         } catch (LoginException e) {
             throw new Error("Failed to Authenticate");
         }
