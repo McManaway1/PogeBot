@@ -15,23 +15,22 @@ import javax.security.auth.login.LoginException;
 public class PogeBot {
     private static JDA jda;
 
-    private PogeBot(String info, String token) {
+    private PogeBot(String token) {
         /* Initialize Bot */
         try {
             jda = new JDABuilder(AccountType.BOT).setToken(token).addEventListener(new Listener()).buildAsync();
-            jda.getPresence().setPresence(Game.of(Game.GameType.DEFAULT, info), false);
+
+            /* Set Presence */
+            Game presence = Game.playing("!help");
+            jda.getPresence().setPresence(presence, false);
         } catch (LoginException e) {
             throw new Error("Failed to Authenticate");
         }
     }
 
-    public static JDA getJda() {
-        return jda;
-    }
-
     public static void main(String[] args) {
         /* Start Bot using Command Arguments */
-        if (args.length == 2) new PogeBot(args[0], args[1]);
-        else System.out.println("Invalid Arguments: <Info> <Key>");
+        if (args.length == 1) new PogeBot(args[0]);
+        else System.out.println("Invalid Arguments: <Key>");
     }
 }
