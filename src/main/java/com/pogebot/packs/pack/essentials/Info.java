@@ -1,7 +1,7 @@
-package com.teambeez.packs.pack.essentials;
+package com.pogebot.packs.pack.essentials;
 
-import com.teambeez.messages.EmbedCreator;
-import com.teambeez.parsers.containers.CommandData;
+import com.pogebot.messages.EmbedCreator;
+import com.pogebot.parsers.containers.CommandData;
 import net.dv8tion.jda.core.JDAInfo;
 
 import java.awt.*;

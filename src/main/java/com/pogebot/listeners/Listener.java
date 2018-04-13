@@ -1,10 +1,10 @@
-package com.teambeez.listeners;
+package com.pogebot.listeners;
 
-import com.teambeez.messages.MessageHandler;
-import com.teambeez.packs.PackHandler;
-import com.teambeez.parsers.CommandParser;
-import com.teambeez.parsers.ParseException;
-import com.teambeez.parsers.containers.CommandData;
+import com.pogebot.messages.MessageHandler;
+import com.pogebot.packs.PackHandler;
+import com.pogebot.parsers.CommandParser;
+import com.pogebot.parsers.ParseException;
+import com.pogebot.parsers.containers.CommandData;
 import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.ShutdownEvent;

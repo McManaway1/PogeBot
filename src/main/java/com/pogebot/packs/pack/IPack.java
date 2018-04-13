@@ -1,6 +1,6 @@
-package com.teambeez.packs.pack;
+package com.pogebot.packs.pack;
 
-import com.teambeez.parsers.containers.CommandData;
+import com.pogebot.parsers.containers.CommandData;
 import net.dv8tion.jda.core.events.Event;
 
 public interface IPack {

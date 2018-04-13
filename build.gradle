@@ -1,0 +1,36 @@
+plugins {
+    id'java'
+    id'application'
+}
+
+mainClassName = 'com.pogebot.PogeBot'
+version '0.5 Beta'
+
+
+def jdaVersion = '3.6.0_355'
+def jacksonVersion = '2.9.5'
+def slf4j = '1.7.25'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "net.dv8tion:JDA:$jdaVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion"
+    compile "org.slf4j:slf4j-simple:$slf4j"
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'PogeBot',
+                'Implementation-Version': version,
+                'Main-Class': 'com.pogebot.PogeBot'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+compileJava.options.encoding = 'UTF-8'

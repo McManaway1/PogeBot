@@ -1,4 +1,4 @@
-package com.teambeez.parsers;
+package com.pogebot.parsers;
 
 public class ParseException extends Exception {
 

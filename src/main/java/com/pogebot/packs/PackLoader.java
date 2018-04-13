@@ -1,8 +1,8 @@
-package com.teambeez.packs;
+package com.pogebot.packs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.teambeez.packs.pack.PackData;
+import com.pogebot.packs.pack.PackData;
 
 import javax.annotation.Nullable;
 import java.io.IOException;

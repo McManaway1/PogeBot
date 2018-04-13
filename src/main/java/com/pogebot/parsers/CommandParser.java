@@ -1,6 +1,6 @@
-package com.teambeez.parsers;
+package com.pogebot.parsers;
 
-import com.teambeez.parsers.containers.CommandData;
+import com.pogebot.parsers.containers.CommandData;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class CommandParser {

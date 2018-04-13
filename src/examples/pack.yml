@@ -3,7 +3,7 @@
 name: Example
 description: Example Pack
 mainClass: ExamplePack
-version: 0.1
+version: 1.0
 commands:
-  example:
+  test:
     description: Example Command

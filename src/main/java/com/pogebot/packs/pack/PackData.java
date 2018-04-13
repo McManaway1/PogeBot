@@ -1,4 +1,4 @@
-package com.teambeez.packs.pack;
+package com.pogebot.packs.pack;
 
 import java.util.Map;
 

@@ -1,8 +1,8 @@
-package com.teambeez.packs.pack.essentials;
+package com.pogebot.packs.pack.essentials;
 
-import com.teambeez.messages.EmbedCreator;
-import com.teambeez.packs.pack.PackData;
-import com.teambeez.parsers.containers.CommandData;
+import com.pogebot.messages.EmbedCreator;
+import com.pogebot.packs.pack.PackData;
+import com.pogebot.parsers.containers.CommandData;
 import net.dv8tion.jda.core.utils.tuple.ImmutablePair;
 import net.dv8tion.jda.core.utils.tuple.Pair;
 

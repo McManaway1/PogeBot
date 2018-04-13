@@ -1,4 +1,4 @@
-package com.teambeez.parsers.containers;
+package com.pogebot.parsers.containers;
 
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;

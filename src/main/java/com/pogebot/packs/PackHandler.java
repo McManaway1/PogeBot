@@ -1,13 +1,13 @@
-package com.teambeez.packs;
+package com.pogebot.packs;
 
 
-import com.teambeez.packs.pack.IPack;
-import com.teambeez.packs.pack.PackData;
-import com.teambeez.packs.pack.essentials.Help;
-import com.teambeez.packs.pack.essentials.Info;
-import com.teambeez.packs.pack.essentials.Purge;
-import com.teambeez.packs.pack.essentials.Reload;
-import com.teambeez.parsers.containers.CommandData;
+import com.pogebot.packs.pack.IPack;
+import com.pogebot.packs.pack.PackData;
+import com.pogebot.packs.pack.essentials.Help;
+import com.pogebot.packs.pack.essentials.Info;
+import com.pogebot.packs.pack.essentials.Purge;
+import com.pogebot.packs.pack.essentials.Reload;
+import com.pogebot.parsers.containers.CommandData;
 import net.dv8tion.jda.core.events.Event;
 
 import java.io.File;
