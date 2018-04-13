@@ -1,5 +1,4 @@
 # PogeBot Project
-## Description
 The PogeBot CommandLine Application is a personal project written in Java, and built upon the Java Discord API (JDA) created 
 by [DV8FromTheWorld](https://github.com/DV8FromTheWorld/). The purpose of this project is to use the tools provided by JDA, 
 by create a Bot that can respond to commands input by users in specific servers of DiscordApp.
@@ -20,7 +19,7 @@ For a Pack to be accepted by the PogeBot PackLoader, it must support the followi
 not contain any PogeBot FatJar contents. This Self-Contained Jar must also contain:
     * **pack.yml:** This contains all the information that the PogeBot PluginLoader can use to understand basic information
     about the pack, and what commands are provided.
-    * **Main Pack Class:** This class must either implement `IPack` or extend `AbstractPack` (this class should be referenced,
+    * **Pack-Class:** This class must either implement `IPack` or extend `AbstractPack` (this class should be referenced,
     in the *pack.yml*). This will be the main 'class' to handle all events that may be passed from the PogeBot
     Application to the Pack (i.e. Pack Startup, Handling Messages or Pack Shutdown).
     
