@@ -14,6 +14,7 @@ public class EmbedCreator {
     private User user;
     private EmbedBuilder embed;
 
+    @SuppressWarnings("WeakerAccess")
     public EmbedCreator() {
         this.embed = new EmbedBuilder();
     }
@@ -74,7 +75,7 @@ public class EmbedCreator {
     }
 
     private void generateFooter() {
-        if(user == null) return;
+        if (user == null) return;
         embed.setFooter(user.getName(), user.getAvatarUrl());
     }
 }

@@ -5,7 +5,6 @@ import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import org.apache.commons.collections4.list.UnmodifiableList;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -36,6 +35,7 @@ public class CommandData {
         this(command, arguments, guild, member, channel, new ArrayList<>());
     }
 
+    @SuppressWarnings("WeakerAccess")
     public CommandData(String command, String arguments, Guild guild, Member member, TextChannel channel, List<User> mentions) {
         this.command = command;
         this.arguments = arguments;

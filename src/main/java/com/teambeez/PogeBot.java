@@ -16,6 +16,7 @@ public class PogeBot {
 
     /**
      * Constructs the PogeBot Object, which will start the JDA Process with a Presence.
+     *
      * @param token The Private Discord Token for a Bot.
      */
     private PogeBot(String token) {

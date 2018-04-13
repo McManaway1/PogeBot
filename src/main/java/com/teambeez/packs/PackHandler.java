@@ -56,7 +56,7 @@ public class PackHandler {
                         packLoader.close();
                         continue;
                     }
-                    for(String command : data.getCommands().keySet()) {
+                    for (String command : data.getCommands().keySet()) {
                         commands.add(command.toLowerCase());
                     }
 
@@ -70,7 +70,7 @@ public class PackHandler {
                 }
             }
         } else {
-            if (dir.mkdir()) ;//TODO PogeBot.LOG.info("Created Pack Directory");
+            if (dir.mkdir()) System.out.println("Created Pack Dir"); //TODO: PogeBot.LOG.info("Created Pack Directory");
             else throw new Error("Unable to create Pack Directory");
         }
     }
