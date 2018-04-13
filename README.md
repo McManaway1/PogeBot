@@ -11,7 +11,7 @@ This project relies on Gradle for importing the following dependencies:
 * **[Jackson-YAML](https://github.com/FasterXML/jackson-dataformat-yaml):** Provides an implementation for reading YML, 
 used for initializing Modules into the Project.
 
-##Packs
+## Packs
 One of the most important features of this project is the support of external Jar-Modules (Packs). Packs are built upon 
 the PogeBot Jar, and allow users to create their own commands for users with limited knowledge of JDA. 
 
