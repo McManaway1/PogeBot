@@ -12,7 +12,7 @@ public class Info {
                 .setTitle("Bot Information")
                 .setColor(Color.CYAN)
                 .addField("Creator", "Poge", false)
-                .addField("Version", "DEVELOPMENT", false)
+                .addField("Version", "0.5 Beta", false)
                 .addField("JDA Version", JDAInfo.VERSION, false)
                 .sendEmbedMessage(data.getChannel());
     }

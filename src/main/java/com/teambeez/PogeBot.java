@@ -13,12 +13,15 @@ import javax.security.auth.login.LoginException;
  * This class is used to build a Java Discord API Implementation
  */
 public class PogeBot {
-    private static JDA jda;
 
+    /**
+     * Constructs the PogeBot Object, which will start the JDA Process with a Presence.
+     * @param token The Private Discord Token for a Bot.
+     */
     private PogeBot(String token) {
         /* Initialize Bot */
         try {
-            jda = new JDABuilder(AccountType.BOT).setToken(token).addEventListener(new Listener()).buildAsync();
+            JDA jda = new JDABuilder(AccountType.BOT).setToken(token).addEventListener(new Listener()).buildAsync();
 
             /* Set Presence */
             Game presence = Game.playing("!help");
